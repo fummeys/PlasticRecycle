@@ -36,8 +36,8 @@ const D_Home = ()=>{
                     <Text style={home.card_text}>Take a photo</Text>
                 </TouchableOpacity>
             </View>
-            <ScrollView style={home.lower}>
                 <Text style={home.head_text}>Recycle history</Text>
+            <ScrollView style={home.lower}>
                 {element.map((value, index) =>{
                     return(
                         <TouchableOpacity style={home.prodCard} key={value}>
