@@ -251,29 +251,44 @@ const home = StyleSheet.create({
         width: 70,
         height: 70,
     },
+    prodPix: {
+        width: 70,
+        height: 70,
+        alignSelf:'center',
+        borderRadius: 50,
+
+    },
     upper: {
         marginBottom: 20,
         justifyContent: 'center',
-        borderWidth:1
     },
     lower: {
-        backgroundColor: "#F5F3F3"
+        backgroundColor: "#FFFEFE",
+        // borderWidth: 1,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30
     },
     card: {
         margin: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: "#FFFEFE",
-        borderRadius: 30,
-        borderWidth:1
+        borderRadius: 20,
+    },
+    prodCard: {
+        margin: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: "#cffce4",
+        borderRadius: 50,
+        height: 80,
     },
     card_text: {
         color: "#076733",
-        // borderWidth: 2,
         fontSize: 20,
         fontWeight: '400',
         textAlignVertical: 'center',
-        marginRight: Dimensions.get('screen').width * 0.3,
+        marginRight: Dimensions.get('screen').width * 0.4,
     }
 })
 module.exports = {welcome, login, signup, dashboard, home};

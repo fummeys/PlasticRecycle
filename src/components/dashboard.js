@@ -47,7 +47,6 @@ const Dashboard = ()=>{
                     }
                 },
                 tabBarInactiveTintColor: 'gray',
-                tabBarActiveTintColor: '#99ffbb'
             })}
         >
             <TabNav.Screen name="D_Home" 
