@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image, TouchableOpacity, ScrollView} from 'react-native'
+import { View, Text, Image, TouchableOpacity, ScrollView, Dimensions} from 'react-native'
 import { Value } from 'react-native-reanimated'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { home } from '../styles'
@@ -40,13 +40,33 @@ const D_Home = ()=>{
             <ScrollView style={home.lower}>
                 {element.map((value, index) =>{
                     return(
-                        <TouchableOpacity style={home.prodCard} key={value}>
-                            <Image
-                                source={{uri:"https://thumbs.dreamstime.com/b/bottle-water-12522351.jpg"}} 
-                                style={home.prodPix}
-                            />
-                            <Text>{index}</Text>
-                        </TouchableOpacity>
+                        <View key={value} style={home.hisCard}>
+                            <TouchableOpacity style={home.prodCard} >
+                                <Image
+                                    source={{uri:"https://thumbs.dreamstime.com/b/bottle-water-12522351.jpg"}} 
+                                    style={home.prodPix}
+                                />
+                                <View style={home.prod_view}>
+                                    <Text style={{color: "green", fontWeight: '700'}}>bottle Name:</Text>
+                                    <Text style={{color:"red"}}>amount earned:</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{
+                                justifyContent:'center',
+                                backgroundColor: '#cffce4',
+                                borderTopRightRadius: 50,
+                                borderBottomRightRadius: 50,
+                                width: Dimensions.get('screen').width * 0.15,
+                                alignItems: 'center',
+                                height: 90
+                                }}>
+                                <MaterialCommunityIcons 
+                                    name="trash-can"
+                                    size={40}
+                                    color="red"
+                                />
+                            </TouchableOpacity>
+                        </View>
                     )
                 })}
             </ScrollView>

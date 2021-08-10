@@ -234,7 +234,6 @@ const home = StyleSheet.create({
     heading: {
         borderRadius: 20,
         borderColor: "black",
-        // borderWidth: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         height: "10%"
@@ -263,7 +262,7 @@ const home = StyleSheet.create({
         justifyContent: 'center',
     },
     lower: {
-        backgroundColor: "#FFFEFE",
+        // backgroundColor: "#FFFEFE",
         // borderWidth: 1,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30
@@ -278,10 +277,11 @@ const home = StyleSheet.create({
     prodCard: {
         margin: 10,
         flexDirection: 'row',
-        justifyContent: 'space-between',
         backgroundColor: "#cffce4",
-        borderRadius: 50,
+        borderTopLeftRadius: 50,
+        borderBottomLeftRadius: 50,
         height: 80,
+        width: Dimensions.get('screen').width * 0.75
     },
     card_text: {
         color: "#076733",
@@ -289,6 +289,43 @@ const home = StyleSheet.create({
         fontWeight: '400',
         textAlignVertical: 'center',
         marginRight: Dimensions.get('screen').width * 0.4,
+    },
+    prod_view: {
+        justifyContent: 'center',
+        marginLeft: 20
+    },
+    hisCard: {
+        flexDirection: 'row',
+        borderTopLeftRadius: 50,
+        borderBottomLeftRadius: 50,
+        marginBottom: 10
     }
 })
-module.exports = {welcome, login, signup, dashboard, home};
+const transferStyle = StyleSheet.create({
+    main: {
+        height: "100%",
+        marginHorizontal: 15,
+        marginTop: 10,
+        backgroundColor: "#F5F3F3"
+    },
+    heading: {
+        borderRadius: 20,
+        borderColor: "black",
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        height: "10%"
+    },
+    head_text:{
+        color:"black",
+        justifyContent: 'center',
+        textAlignVertical: 'center',
+        left: 30,
+        fontSize: 36,
+        fontWeight: '700'
+    },
+    profilePix: {
+        width: 70,
+        height: 70,
+    },
+})
+module.exports = {welcome, login, signup, dashboard, home, transferStyle};
