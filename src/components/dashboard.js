@@ -6,6 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import D_Home from './dashboard/D_Home'
 import Transfer from './dashboard/Transfer'
 import Services from './dashboard/Services'
+import Settings from './dashboard/Settings'
 import { dashboard } from './styles'
 
 const TabNav = createBottomTabNavigator()
@@ -36,7 +37,7 @@ const Dashboard = ()=>{
                                 color={color}
                             />
                         )
-                    } else if(route.name === 'Services'){
+                    } else if(route.name === 'Settings'){
                         return(
                             <MaterialCommunityIcons 
                                 name="cog-outline"
@@ -54,7 +55,7 @@ const Dashboard = ()=>{
                 options = {{ title: 'Home'}}
             />
             <TabNav.Screen name="Transfer" component={ Transfer}/>
-            <TabNav.Screen name="Services" component={ Services}/>
+            <TabNav.Screen name="Settings" component={ Settings}/>
         </TabNav.Navigator>
     )
 }

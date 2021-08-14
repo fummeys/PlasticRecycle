@@ -262,8 +262,6 @@ const home = StyleSheet.create({
         justifyContent: 'center',
     },
     lower: {
-        // backgroundColor: "#FFFEFE",
-        // borderWidth: 1,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30
     },
@@ -326,6 +324,65 @@ const transferStyle = StyleSheet.create({
     profilePix: {
         width: 70,
         height: 70,
+    },
+    upper: {
+        marginBottom: 20,
+        justifyContent: 'center',
+        flexDirection: 'row',
+        flexWrap: 'wrap'
+    },
+    lower: {
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        height:800
+    },
+    upper_card: {
+        backgroundColor: '#FFFEFE',
+        width: Dimensions.get('screen').width * 0.4,
+        margin: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 20,
+        height: 100
+
+    },
+    upper_card_text: {
+        color: '#076733'
+    },
+    history_text:{
+        color:"black",
+        justifyContent: 'center',
+        textAlignVertical: 'center',
+        left: 30,
+        fontSize: 24,
+        fontWeight: '700'
+    },
+    hisCard: {
+        flexDirection: 'row',
+        borderTopLeftRadius: 50,
+        borderBottomLeftRadius: 50,
+        marginBottom: 10
+    },
+    prodCard: {
+        margin: 10,
+        flexDirection: 'row',
+        backgroundColor: "#FFFEFE",
+        borderTopLeftRadius: 50,
+        borderBottomLeftRadius: 50,
+        height: 80,
+        width: '75%',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    transfer_name:{
+        left: 30
+    },
+    transfer_det:{
+        right: 10
+    },
+    trans_title: {
+        fontSize: 17,
+        fontWeight: '700'
     },
 })
 module.exports = {welcome, login, signup, dashboard, home, transferStyle};

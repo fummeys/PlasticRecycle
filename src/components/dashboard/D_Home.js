@@ -35,6 +35,14 @@ const D_Home = ()=>{
                     />
                     <Text style={home.card_text}>Take a photo</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={home.card}>
+                    <MaterialCommunityIcons 
+                        name="forum-outline"
+                        size={80}
+                        color="#808080"
+                    />
+                    <Text style={home.card_text}>Chat with Other users</Text>
+                </TouchableOpacity>
             </View>
                 <Text style={home.head_text}>Recycle history</Text>
             <ScrollView style={home.lower}>
@@ -58,7 +66,8 @@ const D_Home = ()=>{
                                 borderBottomRightRadius: 50,
                                 width: Dimensions.get('screen').width * 0.15,
                                 alignItems: 'center',
-                                height: 90
+                                height: 80,
+                                marginTop:10
                                 }}>
                                 <MaterialCommunityIcons 
                                     name="trash-can"

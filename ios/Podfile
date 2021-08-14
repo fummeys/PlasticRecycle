@@ -12,6 +12,10 @@ target 'PlasticRecycle' do
     :hermes_enabled => false
   )
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
   target 'PlasticRecycleTests' do
     inherit! :complete
     # Pods for testing
