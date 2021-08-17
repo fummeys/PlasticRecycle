@@ -1,6 +1,5 @@
 import React from 'react'
 import { BackHandler } from 'react-native'
-// import { useNavigation} from '@react-navigation/native'
 import { createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import D_Home from './dashboard/D_Home'
@@ -54,8 +53,8 @@ const Dashboard = ()=>{
                 component={ D_Home}
                 options = {{ title: 'Home'}}
             />
-            <TabNav.Screen name="Transfer" component={ Transfer}/>
-            <TabNav.Screen name="Settings" component={ Settings}/>
+            <TabNav.Screen name="Transfer" component={ Transfer }/>
+            <TabNav.Screen name="Settings" component={ Settings }/>
         </TabNav.Navigator>
     )
 }

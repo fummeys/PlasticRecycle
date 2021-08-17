@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, SafeAreaView, Image, TextInput, TouchableOpacity} from 'react-native'
 import { useNavigation} from '@react-navigation/native'
 import { login } from './styles'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Login = ()=>{
     const [email, setemail] = useState('')
@@ -10,6 +11,7 @@ const Login = ()=>{
     const [showpass, setshowpass] = useState(true)
     const naving = useNavigation()
     
+
     const inputemail = (email)=>{
         setemail(email)
         // console.log(email)
@@ -30,6 +32,7 @@ const Login = ()=>{
         }
     }
     const subMitlogin = ()=>{
+        AsyncStorage.setItem('isLogged', 'true')
         naving.navigate('Dashboard')
     }
     const gotoReg = ()=>{

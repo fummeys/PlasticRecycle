@@ -1,19 +1,16 @@
 import React from 'react'
 import { View, Text, TouchableOpacity,
      SafeAreaView, Image} from 'react-native'
-import { useNavigation } from '@react-navigation/native'
 import { welcome } from './styles'
-
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useNavigation } from '@react-navigation/native'
 
 const Welcome = ()=>{
-
-    const naving = useNavigation()
+    const Naving = useNavigation()
     const gotoLogin = ()=>{
-        naving.navigate('Login')
+        AsyncStorage.setItem('iswelcomed', 'true')
+        Naving.navigate('Login')
     }
-    
-
     return(
         <SafeAreaView>
             <View style={ welcome.main }>
