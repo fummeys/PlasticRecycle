@@ -1,30 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, Image, TouchableOpacity, ScrollView, Dimensions} from 'react-native'
-import { Value } from 'react-native-reanimated'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { home } from '../styles'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 
 const D_Home = ()=>{
-       
+    const [user, setuser] = useState('')
     let element = []
     for (let index = 0; index < 10; index++) {
         element.push(index)
     }
-    // console.log(element)
+    // AsyncStorage.getAllKeys()
+    // .then((res)=> {
+    //     console.log(res)
+    // })
+    useEffect(()=>{
+        AsyncStorage.getItem('user')
+        .then((res)=>{
+            let a = JSON.parse(res)
+            // console.log(a)
+            setuser(a)
+        })
+    },[])
     
     
     return(
         <View style={home.main}>
             <View style={home.heading}>
-                <Text style={home.head_text}>Welcome, CHLOE</Text>
+                <Text style={home.head_text}>Welcome, {user.name}</Text>
                 <Image source={require('../img/rDEOVtE7vOs.png')} style={home.profilePix}/>
             </View>
-            <Text style={home.card_text}>Balance: 
+            <Text style={home.card_text}>Balance:  
                 <MaterialCommunityIcons 
                     name="currency-ngn"
                     size={20}
                     color="#076733"
-                />10
+                />
+                {user.coins}
             </Text>
             <View style={home.upper}>
                 <TouchableOpacity style={home.card}>

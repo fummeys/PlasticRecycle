@@ -7,7 +7,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 const Settings = () => {
     const Naving = useNavigation()
     const logout = ()=>{
-        console.log('ok')
         AsyncStorage.setItem('isLogged', 'false')
         Naving.navigate('Login')
     }
