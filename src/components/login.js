@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, SafeAreaView, Image, TextInput, TouchableOpacity, Alert} from 'react-native'
+import { View, Text, SafeAreaView, 
+    Image, TextInput, TouchableOpacity, 
+    Alert, Platform, KeyboardAvoidingView} from 'react-native'
 import { useNavigation} from '@react-navigation/native'
 import { login } from './styles'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -10,7 +12,7 @@ const Login = ()=>{
     const [passimg, setpassimg] = useState(require('./img/hide.png'))
     const [showpass, setshowpass] = useState(true)
     const naving = useNavigation()
-    
+    const offset = Platform.OS === 'ios' ? 40 : 0
     useEffect(()=>{
         AsyncStorage.getItem('email')
         .then((res)=>{
@@ -67,11 +69,12 @@ const Login = ()=>{
                 AsyncStorage.setItem('token', data.token)
                 naving.navigate('Dashboard')
             } else {
-                Alert.alert('error', data.message[0])                
+                Alert.alert('Error', data.message[0])                
             }
         })
         .catch((err)=>{
-            console.log(err)
+            // console.log(err)
+            Alert.alert('Error', 'an error occured')
         })
     }
     const gotoReg = ()=>{
@@ -80,41 +83,45 @@ const Login = ()=>{
 
     return(
         <SafeAreaView>
-            <View style={login.main}>
-                <Text style={login.heading}>Sign in to your Acount</Text>
-                <Image source={require('./img/Capture.png')} style={ login.frontImg } />
-                <View style={login.loginForm}>
-                    <TextInput 
-                        placeholder="Email Adress"
-                        style={login.formtext}
-                        onChangeText={inputemail}
-                        autoCompleteType="email"
-                        defaultValue={email}
-                    />
-                    <Image source={require('./img/iconmail.png')} style={login.mailIcon} />
-                    <TextInput 
-                        placeholder="Password"
-                        style={login.formtext}
-                        onChangeText={inputpassword}
-                        autoCompleteType="password"
-                        defaultValue={password}
-                        secureTextEntry={showpass}
-                    />
-                    <TouchableOpacity style={login.clickicon} onPress={()=> switchPassword(showpass)}>
-                        <Image source={passimg} style={login.passicon}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={login.forgot}>Forgot Password?</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={login.loginBotton} onPress={subMitlogin}>
-                        <Text style={{color: '#FFFDFD', textAlign: 'center', fontSize: 20, fontWeight: '700'}}>LOGIN</Text>
-                    </TouchableOpacity>
+            <KeyboardAvoidingView
+                behavior='position'
+                keyboardVerticalOffset={offset}>
+                <View style={login.main}>
+                    <Text style={login.heading}>Sign in to your Acount</Text>
+                    <Image source={require('./img/Capture.png')} style={ login.frontImg } />
+                    <View style={login.loginForm}>
+                        <TextInput 
+                            placeholder="Email Adress"
+                            style={login.formtext}
+                            onChangeText={inputemail}
+                            defaultValue={email}
+                            autoCompleteType='email'
+                            />
+                        <Image source={require('./img/iconmail.png')} style={login.mailIcon} />
+                        <TextInput 
+                            placeholder="Password"
+                            style={login.formtext}
+                            onChangeText={inputpassword}
+                            autoCompleteType='password'
+                            defaultValue={password}
+                            secureTextEntry={showpass}
+                            />
+                        <TouchableOpacity style={login.clickicon} onPress={()=> switchPassword(showpass)}>
+                            <Image source={passimg} style={login.passicon}/>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                            <Text style={login.forgot}>Forgot Password?</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={login.loginBotton} onPress={subMitlogin}>
+                            <Text style={{color: '#FFFDFD', textAlign: 'center', fontSize: 20, fontWeight: '700'}}>LOGIN</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={login.foottext}>
+                        <Text>Don’t have an account?</Text>
+                        <TouchableOpacity onPress={gotoReg}><Text style={{color: '#0C3B81'}}> Sign Up</Text></TouchableOpacity>
+                    </View>
                 </View>
-                <View style={login.foottext}>
-                    <Text>Don’t have an account?</Text>
-                    <TouchableOpacity onPress={gotoReg}><Text style={{color: '#0C3B81'}}> Sign Up</Text></TouchableOpacity>
-                </View>
-                </View>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     )
 }
