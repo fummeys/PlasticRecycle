@@ -59,9 +59,12 @@ const Register = ()=>{
         }
     }
     const subMitlogin = ()=>{
-        if (password == r_pass) {
+        if(fname == "" || lname == "" || email == "" || r_pass == ""){
+            setmessStyle(signup.mess_r)
+            setmessage('All fields must be filled')
+        }else if (password == r_pass) {
             setmessStyle(signup.mess_g)
-            fetch('https://teleprintersoftwares.com/plasticcycleapi/register', {
+            fetch('https://teleprintersoftwares.com/plasticcycleapi/api/register', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -89,7 +92,6 @@ const Register = ()=>{
                 <Text style={signup.heading}>Create an Account</Text>
                 <Image source={require('./img/undraw_Dev_focus_re_6iwt.png')} style={ signup.frontImg } />
                 <View style={signup.loginForm}>
-                <View style={{position: 'relative'}}><Text style={messStyle}>{message}</Text></View>
                     <TextInput 
                         placeholder="First name"
                         style={signup.formtext}
@@ -128,6 +130,8 @@ const Register = ()=>{
                     <TouchableOpacity style={signup.clickicon} onPress={()=> r_switchPassword(r_showpass)}>
                         <Image source={r_passimg} style={signup.passicon}/>
                     </TouchableOpacity>
+                    
+                <View style={{position: 'relative'}}><Text style={messStyle}>{message}</Text></View>
                     <TouchableOpacity style={signup.loginBotton} onPress={subMitlogin}>
                         <Text style={{color: '#FFFDFD', textAlign: 'center', fontSize: 20, fontWeight: '700'}}>SIGN UP</Text>
                     </TouchableOpacity>

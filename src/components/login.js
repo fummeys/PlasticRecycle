@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, SafeAreaView, Image, TextInput, TouchableOpacity} from 'react-native'
+import { View, Text, SafeAreaView, Image, TextInput, TouchableOpacity, Alert} from 'react-native'
 import { useNavigation} from '@react-navigation/native'
 import { login } from './styles'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -11,6 +11,22 @@ const Login = ()=>{
     const [showpass, setshowpass] = useState(true)
     const naving = useNavigation()
     
+    useEffect(()=>{
+        AsyncStorage.getItem('email')
+        .then((res)=>{
+            // console.log(res)
+            if (email == '') {
+                setemail(res)
+            }
+        })
+        AsyncStorage.getItem('password')
+        .then((res)=>{
+            // console.log(res)
+            if (password == '') {
+                setpassword(res)                
+            }
+        })
+    },[email, password])
 
     const inputemail = (email)=>{
         setemail(email)
@@ -32,8 +48,31 @@ const Login = ()=>{
         }
     }
     const subMitlogin = ()=>{
-        AsyncStorage.setItem('isLogged', 'true')
-        naving.navigate('Dashboard')
+        fetch('https://teleprintersoftwares.com/plasticcycleapi/api/login',{
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        }).then((res)=> res.json())
+        .then((data)=>{
+            if (data.token) {
+                AsyncStorage.setItem('isLogged', 'true')
+                AsyncStorage.setItem('email', email)
+                AsyncStorage.setItem('password', password)
+                AsyncStorage.setItem('user', JSON.stringify(data.user))
+                AsyncStorage.setItem('token', data.token)
+                naving.navigate('Dashboard')
+            } else {
+                Alert.alert('error', data.message[0])                
+            }
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
     }
     const gotoReg = ()=>{
         naving.navigate('Register')
@@ -50,6 +89,7 @@ const Login = ()=>{
                         style={login.formtext}
                         onChangeText={inputemail}
                         autoCompleteType="email"
+                        defaultValue={email}
                     />
                     <Image source={require('./img/iconmail.png')} style={login.mailIcon} />
                     <TextInput 
@@ -57,6 +97,7 @@ const Login = ()=>{
                         style={login.formtext}
                         onChangeText={inputpassword}
                         autoCompleteType="password"
+                        defaultValue={password}
                         secureTextEntry={showpass}
                     />
                     <TouchableOpacity style={login.clickicon} onPress={()=> switchPassword(showpass)}>
