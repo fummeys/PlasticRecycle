@@ -260,6 +260,7 @@ const home = StyleSheet.create({
     upper: {
         marginBottom: 20,
         justifyContent: 'center',
+        height: '30%'
     },
     lower: {
         borderTopLeftRadius: 30,
@@ -329,7 +330,8 @@ const transferStyle = StyleSheet.create({
         marginBottom: 20,
         justifyContent: 'center',
         flexDirection: 'row',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        height: '30%'
     },
     lower: {
         borderTopLeftRadius: 30,
