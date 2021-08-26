@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import { View, Text, SafeAreaView, 
     TouchableOpacity, TextInput, Image, 
-    Alert, Platform, KeyboardAvoidingView} from 'react-native'
+    Alert, Platform, KeyboardAvoidingView,
+    ActivityIndicator} from 'react-native'
 import { useNavigation} from '@react-navigation/native'
 import { signup, login } from './styles'
+import { SvgXml } from 'react-native-svg'
+import { dev_focus } from './img/Images'
 
 
 const Register = ()=>{
@@ -101,7 +104,9 @@ const Register = ()=>{
                 keyboardVerticalOffset={offset}>
                 <View style={signup.main}>
                     <Text style={signup.heading}>Create an Account</Text>
-                    <Image source={require('./img/undraw_Dev_focus_re_6iwt.png')} style={ signup.frontImg } />
+                    <View style={signup.frontImg}>
+                        <SvgXml xml={dev_focus} height="100%" width="100%"/>
+                    </View>
                     <View style={signup.loginForm}>
                         <TextInput 
                             placeholder="First name"
@@ -147,9 +152,12 @@ const Register = ()=>{
                             <Text style={{color: '#FFFDFD', textAlign: 'center', fontSize: 20, fontWeight: '700'}}>SIGN UP</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={login.foottext}>
-                        <Text>Already have an account? </Text>
-                        <TouchableOpacity onPress={gotologin}><Text style={{color: '#0C3B81'}}>Sign in</Text></TouchableOpacity>
+                    <View style={signup.footView}>
+                        <ActivityIndicator color="#00ff00" size="large"/>
+                        <View style={signup.foottext}>
+                            <Text>Already have an account? </Text>
+                            <TouchableOpacity onPress={gotologin}><Text style={{color: '#0C3B81'}}>Sign in</Text></TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </KeyboardAvoidingView>

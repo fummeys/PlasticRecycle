@@ -128,10 +128,13 @@ const login = StyleSheet.create({
         marginBottom: 30
     },
     foottext:{
+        flexDirection: 'row',
+    },
+    footView: {
         position: 'absolute',
-        top: Dimensions.get('screen').height * 0.87,
+        top: Dimensions.get('screen').height * 0.86,
         alignSelf: 'center',
-        flexDirection: 'row'
+        // flexDirection: 'row'
     }
 })
 
@@ -205,10 +208,12 @@ const signup = StyleSheet.create({
         marginTop: 30
     },
     foottext:{
+        flexDirection: 'row',
+    },
+    footView: {
         position: 'absolute',
-        top: Dimensions.get('screen').height * 0.9,
+        top: Dimensions.get('screen').height * 0.86,
         alignSelf: 'center',
-        flexDirection: 'row'
     },
     mess_g:{
         color: 'green'
@@ -387,4 +392,5 @@ const transferStyle = StyleSheet.create({
         fontWeight: '700'
     },
 })
+
 module.exports = {welcome, login, signup, dashboard, home, transferStyle};

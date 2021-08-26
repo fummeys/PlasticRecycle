@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, SafeAreaView, 
     Image, TextInput, TouchableOpacity, 
-    Alert, Platform, KeyboardAvoidingView} from 'react-native'
+    Alert, Platform, KeyboardAvoidingView,
+    ActivityIndicator} from 'react-native'
 import { useNavigation} from '@react-navigation/native'
 import { login } from './styles'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { SvgXml } from 'react-native-svg'
+import { nature } from './img/Images'
 
 const Login = ()=>{
     const [email, setemail] = useState('')
     const [password, setpassword] = useState('')
     const [passimg, setpassimg] = useState(require('./img/hide.png'))
     const [showpass, setshowpass] = useState(true)
+    const [loading, setloading] = useState(false)
     const naving = useNavigation()
     const offset = Platform.OS === 'ios' ? 40 : 0
     useEffect(()=>{
@@ -67,7 +71,7 @@ const Login = ()=>{
                 AsyncStorage.setItem('password', password)
                 AsyncStorage.setItem('user', JSON.stringify(data.user))
                 AsyncStorage.setItem('token', data.token)
-                naving.navigate('Dashboard')
+                // naving.navigate('Dashboard')
             } else {
                 Alert.alert('Error', data.message[0])                
             }
@@ -81,6 +85,8 @@ const Login = ()=>{
         naving.navigate('Register')
     }
 
+    
+
     return(
         <SafeAreaView>
             <KeyboardAvoidingView
@@ -88,7 +94,9 @@ const Login = ()=>{
                 keyboardVerticalOffset={offset}>
                 <View style={login.main}>
                     <Text style={login.heading}>Sign in to your Acount</Text>
-                    <Image source={require('./img/Capture.png')} style={ login.frontImg } />
+                    <View style={login.frontImg}>
+                        <SvgXml xml={nature} height="100%" width="100%"/>
+                    </View>
                     <View style={login.loginForm}>
                         <TextInput 
                             placeholder="Email Adress"
@@ -116,9 +124,12 @@ const Login = ()=>{
                             <Text style={{color: '#FFFDFD', textAlign: 'center', fontSize: 20, fontWeight: '700'}}>LOGIN</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={login.foottext}>
-                        <Text>Don’t have an account?</Text>
-                        <TouchableOpacity onPress={gotoReg}><Text style={{color: '#0C3B81'}}> Sign Up</Text></TouchableOpacity>
+                    <View style={login.footView}>
+                        <ActivityIndicator color="#00ff00" size="large"/>
+                        <View style={login.foottext}>
+                            <Text>Don’t have an account?</Text>
+                            <TouchableOpacity onPress={gotoReg}><Text style={{color: '#0C3B81'}}> Sign Up</Text></TouchableOpacity>                            
+                        </View>    
                     </View>
                 </View>
             </KeyboardAvoidingView>
