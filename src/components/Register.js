@@ -21,6 +21,7 @@ const Register = ()=>{
     const [messStyle, setmessStyle] = useState()
     const [showpass, setshowpass] = useState(true)
     const [r_showpass, setr_showpass] = useState(true)
+    const [loading, setLoading] = useState('none')
     const naving = useNavigation()
     const offset = Platform.OS === 'ios' ? 40 : 0
 
@@ -61,7 +62,9 @@ const Register = ()=>{
         }
     }
     const subMitlogin = ()=>{
+        setLoading('flex')
         if(fname == "" || lname == "" || email == "" || r_pass == ""){
+            setLoading('none')
             setmessStyle(signup.mess_r)
             setmessage('All fields must be filled')
         }else if (password == r_pass) {
@@ -79,7 +82,8 @@ const Register = ()=>{
                 })
             }).then((res)=> res.json())
             .then((data)=> {
-                console.log(data)
+                // console.log(data)
+                setLoading('none')
                 if (data.token) {
                     naving.navigate('Init')
                 } else {
@@ -87,9 +91,11 @@ const Register = ()=>{
                 }
             })
             .catch((error)=> {
+                setLoading('none')
                 Alert.alert('Error', 'An error occured')
             })
         } else {
+            setLoading('none')
             setmessStyle(signup.mess_r)
             setmessage('password missmatch')
         }
@@ -153,7 +159,9 @@ const Register = ()=>{
                         </TouchableOpacity>
                     </View>
                     <View style={signup.footView}>
-                        <ActivityIndicator color="#00ff00" size="large"/>
+                        <View style={{display: loading}}>
+                            <ActivityIndicator color="#00ff00" size="large"/>
+                        </View>
                         <View style={signup.foottext}>
                             <Text>Already have an account? </Text>
                             <TouchableOpacity onPress={gotologin}><Text style={{color: '#0C3B81'}}>Sign in</Text></TouchableOpacity>

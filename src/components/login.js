@@ -14,7 +14,7 @@ const Login = ()=>{
     const [password, setpassword] = useState('')
     const [passimg, setpassimg] = useState(require('./img/hide.png'))
     const [showpass, setshowpass] = useState(true)
-    const [loading, setloading] = useState(false)
+    const [loading, setloading] = useState('none')
     const naving = useNavigation()
     const offset = Platform.OS === 'ios' ? 40 : 0
     useEffect(()=>{
@@ -54,6 +54,7 @@ const Login = ()=>{
         }
     }
     const subMitlogin = ()=>{
+        setloading('flex')
         fetch('https://teleprintersoftwares.com/plasticcycleapi/api/login',{
             method: 'POST',
             headers: {
@@ -65,19 +66,20 @@ const Login = ()=>{
             })
         }).then((res)=> res.json())
         .then((data)=>{
+            setloading('none')
             if (data.token) {
                 AsyncStorage.setItem('isLogged', 'true')
                 AsyncStorage.setItem('email', email)
                 AsyncStorage.setItem('password', password)
                 AsyncStorage.setItem('user', JSON.stringify(data.user))
                 AsyncStorage.setItem('token', data.token)
-                // naving.navigate('Dashboard')
+                naving.navigate('Dashboard')
             } else {
                 Alert.alert('Error', data.message[0])                
             }
         })
         .catch((err)=>{
-            // console.log(err)
+            setloading('none')
             Alert.alert('Error', 'an error occured')
         })
     }
@@ -125,7 +127,9 @@ const Login = ()=>{
                         </TouchableOpacity>
                     </View>
                     <View style={login.footView}>
-                        <ActivityIndicator color="#00ff00" size="large"/>
+                        <View style={{display: loading}}>
+                            <ActivityIndicator color="#00ff00" size="large"/>
+                        </View>
                         <View style={login.foottext}>
                             <Text>Don’t have an account?</Text>
                             <TouchableOpacity onPress={gotoReg}><Text style={{color: '#0C3B81'}}> Sign Up</Text></TouchableOpacity>                            
