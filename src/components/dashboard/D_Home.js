@@ -11,15 +11,10 @@ const D_Home = ()=>{
     for (let index = 0; index < 10; index++) {
         element.push(index)
     }
-    // AsyncStorage.getAllKeys()
-    // .then((res)=> {
-    //     console.log(res)
-    // })
     useEffect(()=>{
         AsyncStorage.getItem('user')
         .then((res)=>{
             let a = JSON.parse(res)
-            // console.log(a)
             setuser(a)
         })
     },[])
@@ -57,7 +52,7 @@ const D_Home = ()=>{
                     <Text style={home.card_text}>Chat with Other users</Text>
                 </TouchableOpacity>
             </View>
-                <Text style={home.head_text}>Recycle history</Text>
+            <Text style={home.head_text}>Recycle history</Text>
             <ScrollView style={home.lower}>
                 {element.map((value, index) =>{
                     return(
@@ -79,7 +74,7 @@ const D_Home = ()=>{
                                 borderBottomRightRadius: 50,
                                 width: Dimensions.get('screen').width * 0.15,
                                 alignItems: 'center',
-                                height: 80,
+                                height: 65,
                                 marginTop:10
                                 }}>
                                 <MaterialCommunityIcons 

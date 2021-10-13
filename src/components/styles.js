@@ -225,13 +225,13 @@ const signup = StyleSheet.create({
 
 const dashboard = StyleSheet.create({
     main: {
-        height: '80%',
+        height: Dimensions.get('screen').height * 0.5,
     }
 })
 
 const home = StyleSheet.create({
     main: {
-        height: "100%",
+        height: Dimensions.get('screen').height,
         marginHorizontal: 15,
         marginTop: 10,
         backgroundColor: "#F5F3F3"
@@ -249,7 +249,8 @@ const home = StyleSheet.create({
         textAlignVertical: 'center',
         left: 30,
         fontSize: 24,
-        fontWeight: '700'
+        fontWeight: '700',
+        marginTop: -20
     },
     profilePix: {
         width: 70,
@@ -265,14 +266,19 @@ const home = StyleSheet.create({
     upper: {
         marginBottom: 20,
         justifyContent: 'center',
-        height: '30%'
+        height: Dimensions.get('screen').height * 0.2
     },
     lower: {
         borderTopLeftRadius: 30,
-        borderTopRightRadius: 30
+        borderTopRightRadius: 30,
+        width: Dimensions.get('screen').width * 0.95,
+        marginTop: 5,
+        position: 'absolute',
+        height: Dimensions.get('screen').height * 0.52,
+        top: Dimensions.get('screen').height * 0.35,
     },
     card: {
-        margin: 20,
+        margin: 5,
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: "#FFFEFE",
@@ -284,8 +290,8 @@ const home = StyleSheet.create({
         backgroundColor: "#cffce4",
         borderTopLeftRadius: 50,
         borderBottomLeftRadius: 50,
-        height: 80,
-        width: Dimensions.get('screen').width * 0.75
+        height: 65,
+        width: Dimensions.get('screen').width * 0.7
     },
     card_text: {
         color: "#076733",
@@ -293,6 +299,7 @@ const home = StyleSheet.create({
         fontWeight: '400',
         textAlignVertical: 'center',
         marginRight: Dimensions.get('screen').width * 0.4,
+        marginBottom: -10
     },
     prod_view: {
         justifyContent: 'center',
@@ -302,7 +309,7 @@ const home = StyleSheet.create({
         flexDirection: 'row',
         borderTopLeftRadius: 50,
         borderBottomLeftRadius: 50,
-        marginBottom: 10
+        marginBottom: 5
     }
 })
 const transferStyle = StyleSheet.create({
@@ -341,7 +348,7 @@ const transferStyle = StyleSheet.create({
     lower: {
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        height:800
+        height: 800
     },
     upper_card: {
         backgroundColor: '#FFFEFE',

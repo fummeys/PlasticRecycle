@@ -14,7 +14,6 @@ target 'PlasticRecycle' do
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
-  pod 'RNFS', :path => '../node_modules/react-native-fs'
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
 

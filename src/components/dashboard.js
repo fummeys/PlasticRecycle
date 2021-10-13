@@ -55,6 +55,21 @@ const Dashboard = ()=>{
             />
             <TabNav.Screen name="Transfer" component={ Transfer }/>
             <TabNav.Screen name="Settings" component={ Settings }/>
+            <TabNav.Screen name="Services" 
+                component={ Services }
+                options={{ 
+                    tabBarIcon: ({focused})=>{
+                        let rgb = (focused) ? "red" : "black"
+                        return(
+                            <MaterialCommunityIcons 
+                                name="auto-fix"
+                                size={30}
+                                color={rgb}
+                            />
+                        )
+                    }
+                }}
+            />
         </TabNav.Navigator>
     )
 }
