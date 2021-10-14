@@ -241,16 +241,14 @@ const home = StyleSheet.create({
         borderColor: "black",
         flexDirection: 'row',
         justifyContent: 'space-between',
-        height: "10%"
+        height: Dimensions.get('screen').height * 0.08,
     },
     head_text:{
         color:"black",
         justifyContent: 'center',
         textAlignVertical: 'center',
-        left: 30,
         fontSize: 24,
         fontWeight: '700',
-        marginTop: -20
     },
     profilePix: {
         width: 70,
@@ -260,22 +258,18 @@ const home = StyleSheet.create({
         width: 70,
         height: 70,
         alignSelf:'center',
-        borderRadius: 50,
-
+        borderRadius: 50
     },
     upper: {
         marginBottom: 20,
         justifyContent: 'center',
-        height: Dimensions.get('screen').height * 0.2
+        height: Dimensions.get('screen').height * 0.2,
     },
     lower: {
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         width: Dimensions.get('screen').width * 0.95,
         marginTop: 5,
-        position: 'absolute',
-        height: Dimensions.get('screen').height * 0.52,
-        top: Dimensions.get('screen').height * 0.35,
     },
     card: {
         margin: 5,
@@ -285,7 +279,7 @@ const home = StyleSheet.create({
         borderRadius: 20,
     },
     prodCard: {
-        margin: 10,
+        margin: 5,
         flexDirection: 'row',
         backgroundColor: "#cffce4",
         borderTopLeftRadius: 50,
@@ -299,11 +293,11 @@ const home = StyleSheet.create({
         fontWeight: '400',
         textAlignVertical: 'center',
         marginRight: Dimensions.get('screen').width * 0.4,
-        marginBottom: -10
     },
     prod_view: {
         justifyContent: 'center',
-        marginLeft: 20
+        marginLeft: 20,
+        width: '70%'
     },
     hisCard: {
         flexDirection: 'row',
@@ -314,9 +308,9 @@ const home = StyleSheet.create({
 })
 const transferStyle = StyleSheet.create({
     main: {
-        height: "100%",
+        height: Dimensions.get('screen').height,
         marginHorizontal: 15,
-        marginTop: 10,
+        marginTop: 5,
         backgroundColor: "#F5F3F3"
     },
     heading: {
@@ -324,7 +318,7 @@ const transferStyle = StyleSheet.create({
         borderColor: "black",
         flexDirection: 'row',
         justifyContent: 'space-between',
-        height: "10%"
+        height: Dimensions.get('screen').height * 0.08
     },
     head_text:{
         color:"black",
@@ -337,18 +331,17 @@ const transferStyle = StyleSheet.create({
     profilePix: {
         width: 70,
         height: 70,
+        alignSelf: 'center'
     },
     upper: {
-        marginBottom: 20,
         justifyContent: 'center',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        height: '30%'
+        height: Dimensions.get('screen').height * 0.2,
     },
     lower: {
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        height: 800
     },
     upper_card: {
         backgroundColor: '#FFFEFE',
@@ -357,8 +350,7 @@ const transferStyle = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 20,
-        height: 100
-
+        height: Dimensions.get('screen').height * 0.08,
     },
     upper_card_text: {
         color: '#076733'
@@ -375,7 +367,6 @@ const transferStyle = StyleSheet.create({
         flexDirection: 'row',
         borderTopLeftRadius: 50,
         borderBottomLeftRadius: 50,
-        marginBottom: 10
     },
     prodCard: {
         margin: 10,
@@ -383,21 +374,60 @@ const transferStyle = StyleSheet.create({
         backgroundColor: "#FFFEFE",
         borderTopLeftRadius: 50,
         borderBottomLeftRadius: 50,
-        height: 80,
+        height: 65,
         width: '75%',
         justifyContent: 'space-between',
         alignItems: 'center'
     },
     transfer_name:{
-        left: 30
+        left: 30,
+        width: '70%'
     },
     transfer_det:{
         right: 10
     },
     trans_title: {
-        fontSize: 17,
-        fontWeight: '700'
+        fontSize: 16,
+        fontWeight: '700',
+        paddingLeft: 10
     },
 })
 
-module.exports = {welcome, login, signup, dashboard, home, transferStyle};
+const sendcoinStyles = StyleSheet.create({
+    main: {
+        height: "100%",
+        marginHorizontal: 15,
+        marginTop: 10,
+        backgroundColor: "#F5F3F3"
+    },
+    backDiv: {
+        flexDirection: 'row',
+        paddingTop: 10,
+        paddingBottom: 10
+    },
+    transferForm: {
+        height: Dimensions.get('screen').height * 0.5,
+        width: Dimensions.get('screen').width * 0.9,
+        alignSelf: 'center'
+    },
+    formtext:{
+        backgroundColor: "#e1eaea",
+        padding: 10,
+        marginTop: 5,
+        fontSize: 16,
+        borderRadius: 10,
+    },
+    forminput: {
+        padding: 10
+    },
+    BigText: {
+        fontSize: 25,
+        fontWeight: '700'
+    },
+    normalText: {
+        fontSize: 20,
+        fontWeight: '700'
+    }
+})
+
+module.exports = {welcome, login, signup, dashboard, home, transferStyle, sendcoinStyles};

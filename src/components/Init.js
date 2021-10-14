@@ -42,7 +42,7 @@ const Init =({navigation})=>{
     return(
         <View style={{ flex: 1, justifyContent: 'center', backgroundColor: "#ffffff"}}>
             <Image source={require('./img/logo2.png')} style={{width: 200, height: 200, alignSelf:'center', borderRadius: 30}}/>
-            <Text style={{textAlign: 'center', fontSize:30, color:"#215F2F", marginBottom:10, fontWeight: '700'}}>Plastic Recycle</Text>
+            <Text style={{textAlign: 'center', fontSize:30, color:"#215F2F", marginBottom:10, fontWeight: '700'}}>PlasticRecycle</Text>
             <ActivityIndicator size="large" color="#00ff00"/>
         </View>
     )

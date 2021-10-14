@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Image, TouchableOpacity, ScrollView, Dimensions} from 'react-native'
+import { View, Text, Image, TouchableOpacity,
+     ScrollView, Dimensions, Alert, PermissionsAndroid} from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { home } from '../styles'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -7,18 +8,40 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const D_Home = ()=>{
     const [user, setuser] = useState('')
-    let element = []
-    for (let index = 0; index < 10; index++) {
-        element.push(index)
-    }
+    const [data, setdata] = useState([])
+    const [token, settoken] = useState(null)
+
     useEffect(()=>{
         AsyncStorage.getItem('user')
         .then((res)=>{
             let a = JSON.parse(res)
             setuser(a)
         })
-    },[])
-    
+        if (data.length < 1) {
+            AsyncStorage.getItem('token', (err, dat)=>{
+                settoken(dat)
+                fetch('https://teleprintersoftwares.com/plasticcycleapi/api/outtransfers',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type' : 'application/json',
+                        'Authorization' : `Bearer ${token}`
+                    }
+                }).then((res)=> res.json())
+                .then((trans)=>{
+                    setdata(trans.transactions)
+                }).catch((err)=> console.log('error occured'))
+            })   
+        }
+    },[token])
+
+    const showme = ()=>{
+        console.log(data[0])
+        // console.log(token)
+    }
+
+    const comingSoon = ()=>{
+        Alert.alert('Coming Soon', 'This feature is still under construction')
+    }
     
     return(
         <View style={home.main}>
@@ -26,16 +49,16 @@ const D_Home = ()=>{
                 <Text style={home.head_text}>Welcome, {user.name}</Text>
                 <Image source={require('../img/rDEOVtE7vOs.png')} style={home.profilePix}/>
             </View>
-            <Text style={home.card_text}>Balance:  
-                <MaterialCommunityIcons 
-                    name="currency-ngn"
-                    size={20}
-                    color="#076733"
-                />
-                {user.coins}
-            </Text>
             <View style={home.upper}>
-                <TouchableOpacity style={home.card}>
+                <Text style={home.card_text}>Balance:  
+                    <MaterialCommunityIcons 
+                        name="currency-ngn"
+                        size={20}
+                        color="#076733"
+                    />
+                    {user.coins}
+                </Text>
+                <TouchableOpacity style={home.card} onPress={comingSoon}>
                     <MaterialCommunityIcons 
                         name="image-filter-center-focus-strong-outline"
                         size={80}
@@ -43,7 +66,7 @@ const D_Home = ()=>{
                     />
                     <Text style={home.card_text}>Take a photo</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={home.card}>
+                <TouchableOpacity style={home.card} onPress={comingSoon}>
                     <MaterialCommunityIcons 
                         name="forum-outline"
                         size={80}
@@ -53,40 +76,49 @@ const D_Home = ()=>{
                 </TouchableOpacity>
             </View>
             <Text style={home.head_text}>Recycle history</Text>
-            <ScrollView style={home.lower}>
-                {element.map((value, index) =>{
-                    return(
-                        <View key={value} style={home.hisCard}>
-                            <TouchableOpacity style={home.prodCard} >
-                                <Image
-                                    source={{uri:"https://thumbs.dreamstime.com/b/bottle-water-12522351.jpg"}} 
-                                    style={home.prodPix}
-                                />
-                                <View style={home.prod_view}>
-                                    <Text style={{color: "green", fontWeight: '700'}}>bottle Name:</Text>
-                                    <Text style={{color:"red"}}>amount earned:</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={{
-                                justifyContent:'center',
-                                backgroundColor: '#cffce4',
-                                borderTopRightRadius: 50,
-                                borderBottomRightRadius: 50,
-                                width: Dimensions.get('screen').width * 0.15,
-                                alignItems: 'center',
-                                height: 65,
-                                marginTop:10
-                                }}>
-                                <MaterialCommunityIcons 
-                                    name="trash-can"
-                                    size={40}
-                                    color="red"
-                                />
-                            </TouchableOpacity>
-                        </View>
-                    )
-                })}
-            </ScrollView>
+            <View style={{height: Dimensions.get('screen').height * 0.51}}>
+                <ScrollView style={home.lower}>
+                    {data.map((value, index) =>{
+                        return(
+                            <View key={index} style={home.hisCard}>
+                                <TouchableOpacity style={home.prodCard} onPress={comingSoon}>
+                                    <Image
+                                        source={{uri:"https://thumbs.dreamstime.com/b/bottle-water-12522351.jpg"}} 
+                                        style={home.prodPix}
+                                    />
+                                    <View style={home.prod_view}>
+                                        <Text style={{color: "green", fontWeight: '700'}}>{ value.description}</Text>
+                                        <Text style={{color:"red"}}>amount earned:
+                                        <MaterialCommunityIcons 
+                                            name="currency-ngn"
+                                            size={15}
+                                            color='red'
+                                        />{value.coinissued}</Text>
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{
+                                    justifyContent:'center',
+                                    backgroundColor: '#cffce4',
+                                    borderTopRightRadius: 50,
+                                    borderBottomRightRadius: 50,
+                                    width: Dimensions.get('screen').width * 0.15,
+                                    alignItems: 'center',
+                                    height: 65,
+                                    marginTop:10
+                                    }}
+                                    onPress={showme}
+                                    >
+                                    <MaterialCommunityIcons 
+                                        name="trash-can"
+                                        size={35}
+                                        color="red"
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        )
+                    })}
+                </ScrollView>
+            </View>
         </View>
     )
 }

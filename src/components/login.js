@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, SafeAreaView, 
     Image, TextInput, TouchableOpacity, 
     Alert, Platform, KeyboardAvoidingView,
-    ActivityIndicator} from 'react-native'
+    ActivityIndicator, BackHandler } from 'react-native'
 import { useNavigation} from '@react-navigation/native'
 import { login } from './styles'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -87,7 +87,9 @@ const Login = ()=>{
         naving.navigate('Register')
     }
 
-    
+    BackHandler.addEventListener('hardwareBackPress', ()=>{
+        return true
+    })
 
     return(
         <SafeAreaView>

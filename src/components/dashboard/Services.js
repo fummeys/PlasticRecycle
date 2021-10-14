@@ -60,7 +60,8 @@ const Services = ()=>{
         'Content-Type' : 'application/json',
         'Authorization' : `Bearer ${token}`
       }
-    }).then((res)=> console.log(res))
+    }).then((res)=> res.json())
+    .then((data)=> console.log(data))
     .catch((err)=>{
       console.log(err)
     })
@@ -103,6 +104,44 @@ const Services = ()=>{
       console.log(err)
     })
   }
+  const getAllusers = ()=>{
+    fetch(`https://teleprintersoftwares.com/plasticcycleapi/api/get`, {
+      method: 'POST',
+      headers: {
+        'Content-Type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+      }
+    }).then((res)=> res.json())
+    .then((data)=>{
+      console.log(data)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+  const transferCoin = (receiverid, amount)=>{
+    fetch(`https://teleprintersoftwares.com/plasticcycleapi/api/transfer/${receiverid}/${amount}/${token}`,{
+      method: 'POST',
+      headers: {
+        'Content-Type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+      }
+    }).then((res)=> res.json())
+    .then((data)=>{
+      console.log(data)
+    }).catch((err)=> console.log(err))
+  }
+  const requestCoins = ()=>{
+    fetch(`https://teleprintersoftwares.com/plasticcycleapi/api/coin/50`,{
+      method: 'POST',
+      headers: {
+        'Content-Type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+      }
+    }).then((res)=> res.json())
+    .then((data)=>{
+      console.log(data)
+    }).catch((err)=> console.log(err))
+  }
 
     return(
       <>
@@ -126,9 +165,21 @@ const Services = ()=>{
           <Text>intransfers</Text>
           <Button title="intransfers" onPress={inTransfers}/>
         </View>
-        <View>
+        {/* <View>
           <Text>update</Text>
           <Button title="update user" onPress={updateUser('location', 'lagos')}/>
+        </View> */}
+        <View>
+          <Text>GET</Text>
+          <Button title="GET ALL users" onPress={getAllusers}/>
+        </View>
+        {/* <View>
+          <Text>transfer</Text>
+          <Button title="Transer" onPress={transferCoin(1, 5)}/>
+        </View> */}
+        <View>
+          <Text>Request coins</Text>
+          <Button title="Request Coins" onPress={requestCoins}/>
         </View>
       </>
     )

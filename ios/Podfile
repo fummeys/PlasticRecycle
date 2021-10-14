@@ -17,6 +17,8 @@ target 'PlasticRecycle' do
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
+  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+
   target 'PlasticRecycleTests' do
     inherit! :complete
     # Pods for testing

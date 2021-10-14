@@ -1,75 +1,42 @@
-import React from 'react'
-import { View, Text, Image, TouchableOpacity, Dimensions, ScrollView } from 'react-native'
-import { color } from 'react-native-reanimated'
+import React,{ useState, useEffect } from 'react'
+import { View, Text, Image, TouchableOpacity, ScrollView, Alert, Dimensions} from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { transferStyle } from '../styles'
 
 const Transfer = ()=>{
-    let element = [
-        {
-            title: "BROWN WALTER",
-            date: "Mon, 23 June 2021",
-            amount: 3200,
-            type: "Debit",
-            color: "red"
-        },
-        {
-            title: "BROWN WALTER",
-            date: "Mon, 23 June 2021",
-            amount: 3200,
-            type: "Debit",
-            color: "red"
-        },
-        {
-            title: "BROWN WALTER",
-            date: "Mon, 23 June 2021",
-            amount: 3200,
-            type: "Debit",
-            color: "red"
-        },
-        {
-            title: "BROWN WALTER",
-            date: "Mon, 23 June 2021",
-            amount: 3200,
-            type: "Debit",
-            color: "red"
-        },
-        {
-            title: "BROWN WALTER",
-            date: "Mon, 23 June 2021",
-            amount: 3200,
-            type: "credit",
-            color: "green"
-        },
-        {
-            title: "BROWN WALTER",
-            date: "Mon, 23 June 2021",
-            amount: 3200,
-            type: "credit",
-            color: "green"
-        },
-        {
-            title: "BROWN WALTER",
-            date: "Mon, 23 June 2021",
-            amount: 3200,
-            type: "Debit",
-            color: "red"
-        },
-        {
-            title: "BROWN WALTER",
-            date: "Mon, 23 June 2021",
-            amount: 3200,
-            type: "credit",
-            color: "green"
-        },
-        {
-            title: "BROWN WALTER",
-            date: "Mon, 23 June 2021",
-            amount: 3200,
-            type: "credit",
-            color: "green"
-        },
-    ]
+    const [data, setdata] = useState([])
+    const [token, settoken] = useState(null)
+    
+    useEffect(() => {
+        if (data.length < 1) {
+            AsyncStorage.getItem('token', (err, dat)=>{
+                settoken(dat)
+                fetch('https://teleprintersoftwares.com/plasticcycleapi/api/outtransfers',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type' : 'application/json',
+                        'Authorization' : `Bearer ${token}`
+                    }
+                }).then((res)=> res.json())
+                .then((trans)=>{
+                    setdata(trans.transactions)
+                }).catch((err)=> console.log('error occured'))
+            })   
+        }
+    }, [token])
+    const comingSoon = ()=>{
+        Alert.alert('Coming Soon', 'This feature is still under construction')
+    }
+    const showme = ()=>{
+        console.log(data[0])
+        console.log(token)
+    }
+    const naving = useNavigation()
+    const gototransfer = ()=>{
+        naving.navigate('Sendcoins')
+    }
     return(
         <View style={transferStyle.main}>
             <View style={transferStyle.heading}>
@@ -77,7 +44,7 @@ const Transfer = ()=>{
                 <Image source={require('../img/rDEOVtE7vOs.png')} style={transferStyle.profilePix}/>
             </View>
             <View style={transferStyle.upper}>
-                <TouchableOpacity style={transferStyle.upper_card}>
+                <TouchableOpacity style={transferStyle.upper_card} onPress={gototransfer}>
                     <MaterialCommunityIcons
                         name='credit-card-multiple-outline'
                         size={50}
@@ -85,7 +52,7 @@ const Transfer = ()=>{
                     />
                     <Text style={transferStyle.upper_card_text}>to other user</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={transferStyle.upper_card}>
+                <TouchableOpacity style={transferStyle.upper_card} onPress={showme}>
                     <View style={{flexDirection: 'row', alignItems:'center'}}>
                         <MaterialCommunityIcons
                             name='bank-transfer-out'
@@ -100,7 +67,7 @@ const Transfer = ()=>{
                     </View>
                     <Text style={transferStyle.upper_card_text}>Withdrawal</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={transferStyle.upper_card}>
+                <TouchableOpacity style={transferStyle.upper_card} onPress={comingSoon}>
                     <View style={{flexDirection: 'row', alignItems:'center'}}>
                         <MaterialCommunityIcons
                             name='account-arrow-right'
@@ -115,7 +82,7 @@ const Transfer = ()=>{
                     </View>
                     <Text style={transferStyle.upper_card_text}>send to Bank</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={transferStyle.upper_card}>
+                <TouchableOpacity style={transferStyle.upper_card} onPress={comingSoon}>
                     <View style={{flexDirection: 'row', alignItems:'center'}}>
                         <MaterialCommunityIcons
                             name='bank-transfer-out'
@@ -131,27 +98,26 @@ const Transfer = ()=>{
                     <Text style={transferStyle.upper_card_text}>recieve from Bank</Text>
                 </TouchableOpacity>
             </View>
-            <View style={transferStyle.lower}>
-                <Text style={transferStyle.history_text}>Transfer History</Text>
-                <ScrollView>
-                    {element.map((value, index) =>{
+            <Text style={transferStyle.history_text}>Transfer History</Text>
+            <View style={{height: Dimensions.get('screen').height * 0.55}}>
+                <ScrollView style={transferStyle.lower}>
+                    {data.map((value, index) =>{
                         return(
                             <View key={index} style={transferStyle.hisCard}>
-                                <TouchableOpacity style={transferStyle.prodCard} >
-                                    <View style={transferStyle.transfer_name}>
-                                        <Text style={transferStyle.trans_title}>{value.title}</Text>
-                                        <Text>{value.date}</Text>
+                                <TouchableOpacity style={transferStyle.prodCard} onPress={comingSoon}>
+                                    <View style={{width: '80%'}}>
+                                        <Text style={transferStyle.trans_title}>{value.description}</Text>
+                                        <Text style={{paddingLeft: 15}}>{value.created_at}</Text>
                                     </View>
-                                    <View style={transferStyle.transfer_det}>
-                                        <Text style={{color: value.color}}>
+                                    <View style={{width: '15%' }}>
+                                        <Text style={{color: 'red'}}>
                                             <MaterialCommunityIcons 
                                                 name="currency-ngn"
                                                 size={15}
-                                                color={value.color}
+                                                color='red'
                                             />
-                                            {value.amount}
+                                            {value.coinissued}
                                         </Text>
-                                        <Text>{value.type}</Text>
                                     </View>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={{
@@ -161,12 +127,14 @@ const Transfer = ()=>{
                                     borderBottomRightRadius: 50,
                                     width: '15%',
                                     alignItems: 'center',
-                                    height: 80,
+                                    height: 65,
                                     marginTop:10
-                                    }}>
+                                    }}
+                                    onPress={comingSoon}
+                                    >
                                     <MaterialCommunityIcons 
                                         name="trash-can"
-                                        size={40}
+                                        size={35}
                                         color="red"
                                     />
                                 </TouchableOpacity>
