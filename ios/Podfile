@@ -19,6 +19,7 @@ target 'PlasticRecycle' do
 
   pod 'react-native-camera', :path => '../node_modules/react-native-camera'
 
+
   target 'PlasticRecycleTests' do
     inherit! :complete
     # Pods for testing
