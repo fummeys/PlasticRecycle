@@ -39,23 +39,16 @@ const D_Home = ()=>{
             })   
         }
     },[user])
-    // setInterval(() => {
-    //     AsyncStorage.getItem('user')
-    //     .then((res)=>{
-    //         if (condition) {
-                
-    //         }
-    //         setuser(JSON.parse(res))
-    //         console.log('working')
-    //     })
-    // }, 5000);
+
     const showme = ()=>{
         console.log(data[0])
         // console.log(token)
     }
+
     const gotoCamera = ()=>{
         naving.navigate('Camera')
     }
+    
     const comingSoon = ()=>{
         Alert.alert('Coming Soon', 'This feature is still under construction')
     }

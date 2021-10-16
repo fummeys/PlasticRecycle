@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { View, Text, Image, TouchableOpacity, TextInput, Alert} from 'react-native'
+import { View, Text, Image, TouchableOpacity,
+     TextInput, Alert, ActivityIndicator } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/core'
@@ -8,6 +9,7 @@ import { prevStyles, login } from '../styles'
 
 const Preview = ({route}) => {
     const [giverid, setgiver] = useState(null)
+    const [Loading, setLoading] = useState('none')
     const Naving = useNavigation()
     const gotocamera = ()=>{
         Naving.navigate('Camera')
@@ -15,12 +17,12 @@ const Preview = ({route}) => {
     const updateid = (data)=>{
         setgiver(data)
     }
-    // console.log(route.params.img)
+
     const submitPix =()=>{
+        setLoading('flex')
         AsyncStorage.multiGet(['user','token'],(err, dat)=>{
             let mydat = JSON.parse(dat[0][1])
             let token = dat[1][1]
-            // console.log(token)
             fetch('https://teleprintersoftwares.com/plasticcycleapi/api/reward',{
                 method: 'POST',
                 headers: {
@@ -34,11 +36,28 @@ const Preview = ({route}) => {
                 })
             }).then(res => res.json())
             .then((data)=>{
-                console.log(data)
+                // console.log(data)
                 AsyncStorage.setItem('user', JSON.stringify(data.user))
-                Alert.alert('Recycle status', data.transactionstatus)
+                Alert.alert(
+                    'Recycle status', 
+                    data.transactionstatus,
+                    [
+                        {
+                            text: 'Retry',
+                            style:'cancel'
+                        },{
+                            text: 'Done',
+                            style: 'default',
+                            onPress: ()=> Naving.navigate('Dashboard')
+                        }
+                    ]
+                )
+                setLoading('none')
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                // console.log(err)
+                setLoading('none')
+            })
         })
     }
     return (
@@ -69,6 +88,17 @@ const Preview = ({route}) => {
                     />
                     <Text style={{color: 'black'}}>Submit</Text>
                 </TouchableOpacity>
+            </View>
+            <View style={{
+                display: Loading, 
+                paddingTop: 10, 
+                height: 50,
+                justifyContent: 'center',
+                alignSelf: 'center'
+                }}
+                >
+                <ActivityIndicator color='#00ff00' size='large'/>
+                <Text>uploading...</Text>
             </View>
         </View>
     )
