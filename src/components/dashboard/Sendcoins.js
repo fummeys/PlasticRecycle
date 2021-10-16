@@ -34,6 +34,7 @@ const Sendcoins = () => {
         }).then((res)=> res.json())
         .then((data)=>{
         // console.log(data)
+        // AsyncStorage.setItem('user', JSON.stringify(data.user))
             Alert.alert(
                 'transfer status', 
                 `you have sent ${amount} to ${data.user.name}`,

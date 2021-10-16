@@ -55,16 +55,16 @@ const welcome = StyleSheet.create({
         alignSelf: 'center'
     }
 })
+
 const login = StyleSheet.create({
     main:{
         backgroundColor: '#FFFFFF',
-        height: '100%',
-        borderRadius: 40,
+        height: Dimensions.get('screen').height,
+        justifyContent: 'flex-start',
+        paddingTop: Dimensions.get('screen').height * 0.1
     },
     heading: {
         color: '#2E2D2D',
-        position: 'relative',
-        top: 50,
         textAlign: 'center',
         height: 36,
         width: '100%',
@@ -74,16 +74,14 @@ const login = StyleSheet.create({
         fontSize: 24,
     },
     frontImg: {
-        position: 'absolute',
-        top: Dimensions.get('screen').height * 0.1,
         width: Dimensions.get('screen').width * 0.7,
         height: Dimensions.get('screen').height * 0.3,
         alignSelf: 'center'
     },
     loginForm: {
         width: Dimensions.get('screen').width * 0.8,
-        position: 'absolute',
-        top: Dimensions.get('screen').height * 0.4,
+        // position: 'absolute',
+        // top: Dimensions.get('screen').height * 0.4,
         alignSelf: 'center',
         borderBottomColor: 'black',
         borderBottomWidth: 1
@@ -131,10 +129,9 @@ const login = StyleSheet.create({
         flexDirection: 'row',
     },
     footView: {
-        position: 'absolute',
-        top: Dimensions.get('screen').height * 0.86,
         alignSelf: 'center',
-        // flexDirection: 'row'
+        height: 70,
+        justifyContent: 'flex-end'
     }
 })
 
@@ -306,6 +303,7 @@ const home = StyleSheet.create({
         marginBottom: 5
     }
 })
+
 const transferStyle = StyleSheet.create({
     main: {
         height: Dimensions.get('screen').height,
@@ -430,4 +428,69 @@ const sendcoinStyles = StyleSheet.create({
     }
 })
 
-module.exports = {welcome, login, signup, dashboard, home, transferStyle, sendcoinStyles};
+const cameraScreen = StyleSheet.create({
+    main: {
+        width: Dimensions.get('screen').width,
+        height: Dimensions.get('screen').height,
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: 'black'
+    },
+    preview: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+    },
+    capture: {
+        flex: 0,
+        backgroundColor: '#fff',
+        borderRadius: 50,
+        padding: 5,
+        alignSelf: 'center',
+        margin: 20,
+    },
+})
+
+const prevStyles = StyleSheet.create({
+    main:{
+      width: Dimensions.get('screen').width * 0.9,
+      height: Dimensions.get('screen').height * 0.8,
+      alignSelf: 'center',
+      paddingTop: Dimensions.get('screen').height * 0.05,
+    //   borderWidth: 1,
+      marginTop: 20
+    },
+    imgprev:{
+        width: Dimensions.get('screen').width * 0.5,
+        height: Dimensions.get('screen').height * 0.3,
+        alignSelf: 'center'
+    },
+    prevForm:{
+        // borderWidth: 1,
+        width: Dimensions.get('screen').width * 0.7,
+        alignSelf: 'center'
+    },
+    prevformBottondiv:{
+        flex: 1,
+        flexDirection: 'row',
+        height: 80,
+        width: Dimensions.get('screen').width * 0.5,
+        paddingTop: 50,
+        justifyContent: 'space-between',
+        alignSelf: 'center'
+    },
+    prevfromBotton:{
+        // borderWidth: 2,
+        height: 60,
+        width: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        backgroundColor: '#cccccc'
+    }
+})
+
+module.exports = {
+    welcome, login, signup, dashboard, 
+    home, transferStyle, sendcoinStyles, 
+    cameraScreen, prevStyles};

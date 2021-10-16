@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Button } from 'react-native'
+import { View, Text, Button, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 // import { home } from '../styles'
@@ -11,7 +11,7 @@ const Settings = () => {
         Naving.navigate('Login')
     }
     return (
-        <View style={{justifyContent: 'center', borderColor: "red", borderWidth: 3, height: 500}}>
+        <View>
             <Text>this is settings</Text>
             <Button title="Log out" onPress={logout}/>
         </View>

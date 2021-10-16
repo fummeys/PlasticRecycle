@@ -39,15 +39,13 @@ const Services = ()=>{
       setuser(userObj)
     })
   }, [])
+  
   const takePicture = async function(camera) {
     const options = { quality: 0.5, base64: true };
     const data = await camera.takePictureAsync(options);
     //  eslint-disable-next-line
     console.log(data.uri);
   };
-  // console.log(typeof(user))
-  
-  // let client = JSON.parse(user)
   const Richer = ()=>{
     fetch(`https://teleprintersoftwares.com/plasticcycleapi/api/richer/${user.id}/${user.coins}`, {
       method: 'POST',

@@ -55,7 +55,7 @@ const Dashboard = ()=>{
             />
             <TabNav.Screen name="Transfer" component={ Transfer }/>
             <TabNav.Screen name="Settings" component={ Settings }/>
-            <TabNav.Screen name="Services" 
+            {/* <TabNav.Screen name="Services" 
                 component={ Services }
                 options={{ 
                     tabBarIcon: ({focused})=>{
@@ -69,7 +69,7 @@ const Dashboard = ()=>{
                         )
                     }
                 }}
-            />
+            /> */}
         </TabNav.Navigator>
     )
 }

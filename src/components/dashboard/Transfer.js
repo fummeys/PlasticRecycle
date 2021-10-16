@@ -1,5 +1,6 @@
 import React,{ useState, useEffect } from 'react'
-import { View, Text, Image, TouchableOpacity, ScrollView, Alert, Dimensions} from 'react-native'
+import { View, Text, Image, TouchableOpacity,
+     ScrollView, Alert, Dimensions, BackHandler} from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -22,7 +23,10 @@ const Transfer = ()=>{
                 }).then((res)=> res.json())
                 .then((trans)=>{
                     setdata(trans.transactions)
-                }).catch((err)=> console.log('error occured'))
+                }).catch((err)=> {
+                    console.log(err)
+                    // setdata([])
+                })
             })   
         }
     }, [token])
@@ -37,6 +41,10 @@ const Transfer = ()=>{
     const gototransfer = ()=>{
         naving.navigate('Sendcoins')
     }
+    BackHandler.addEventListener('hardwareBackPress',()=>{
+        naving.navigate('Dashboard')
+        return true
+    })
     return(
         <View style={transferStyle.main}>
             <View style={transferStyle.heading}>

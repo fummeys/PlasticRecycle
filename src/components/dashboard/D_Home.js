@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, Image, TouchableOpacity,
-     ScrollView, Dimensions, Alert, PermissionsAndroid} from 'react-native'
+     ScrollView, Dimensions, Alert} from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { home } from '../styles'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -10,12 +11,14 @@ const D_Home = ()=>{
     const [user, setuser] = useState('')
     const [data, setdata] = useState([])
     const [token, settoken] = useState(null)
+    const naving = useNavigation()
 
     useEffect(()=>{
         AsyncStorage.getItem('user')
         .then((res)=>{
             let a = JSON.parse(res)
             setuser(a)
+            // console.log('set user')
         })
         if (data.length < 1) {
             AsyncStorage.getItem('token', (err, dat)=>{
@@ -29,16 +32,30 @@ const D_Home = ()=>{
                 }).then((res)=> res.json())
                 .then((trans)=>{
                     setdata(trans.transactions)
-                }).catch((err)=> console.log('error occured'))
+                }).catch((err)=> {
+                    console.log(err)
+
+                })
             })   
         }
-    },[token])
-
+    },[user])
+    // setInterval(() => {
+    //     AsyncStorage.getItem('user')
+    //     .then((res)=>{
+    //         if (condition) {
+                
+    //         }
+    //         setuser(JSON.parse(res))
+    //         console.log('working')
+    //     })
+    // }, 5000);
     const showme = ()=>{
         console.log(data[0])
         // console.log(token)
     }
-
+    const gotoCamera = ()=>{
+        naving.navigate('Camera')
+    }
     const comingSoon = ()=>{
         Alert.alert('Coming Soon', 'This feature is still under construction')
     }
@@ -58,7 +75,7 @@ const D_Home = ()=>{
                     />
                     {user.coins}
                 </Text>
-                <TouchableOpacity style={home.card} onPress={comingSoon}>
+                <TouchableOpacity style={home.card} onPress={gotoCamera}>
                     <MaterialCommunityIcons 
                         name="image-filter-center-focus-strong-outline"
                         size={80}
@@ -106,7 +123,7 @@ const D_Home = ()=>{
                                     height: 65,
                                     marginTop:10
                                     }}
-                                    onPress={showme}
+                                    onPress={comingSoon}
                                     >
                                     <MaterialCommunityIcons 
                                         name="trash-can"

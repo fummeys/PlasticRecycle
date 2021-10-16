@@ -8,6 +8,8 @@ import Welcome from './components/welcome'
 import Register from './components/Register'
 import Sendcoins from './components/dashboard/Sendcoins'
 import Init from './components/Init'
+import Camera from './components/dashboard/Camera';
+import Preview from './components/dashboard/Preview';
 
 const StackNav = createStackNavigator()
 
@@ -24,6 +26,8 @@ const Root = ()=>{
                 <StackNav.Screen name="Welcome" component={Welcome} options={{headerShown: false}}/>
                 <StackNav.Screen name="Register" component={ Register } options={{headerShown: false}} />
                 <StackNav.Screen name="Sendcoins" component={ Sendcoins } options={{headerShown: false}} />
+                <StackNav.Screen name="Camera" component={ Camera } options={{headerShown: false}}/>
+                <StackNav.Screen name="Preview" component={ Preview } options={{headerShown: false}} />
             </StackNav.Navigator>
         </NavigationContainer>
     )
