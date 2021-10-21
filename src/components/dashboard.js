@@ -4,7 +4,7 @@ import { createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import D_Home from './dashboard/D_Home'
 import Transfer from './dashboard/Transfer'
-import Services from './dashboard/Services'
+// import Services from './dashboard/Services'
 import Settings from './dashboard/Settings'
 import { dashboard } from './styles'
 

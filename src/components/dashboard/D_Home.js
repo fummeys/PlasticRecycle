@@ -23,7 +23,7 @@ const D_Home = ()=>{
         if (data.length < 1) {
             AsyncStorage.getItem('token', (err, dat)=>{
                 settoken(dat)
-                fetch('https://teleprintersoftwares.com/plasticcycleapi/api/outtransfers',{
+                fetch('https://teleprintersoftwares.com/plasticcycleapi/api/intransfers',{
                     method: 'POST',
                     headers: {
                         'Content-Type' : 'application/json',
@@ -32,8 +32,9 @@ const D_Home = ()=>{
                 }).then((res)=> res.json())
                 .then((trans)=>{
                     setdata(trans.transactions)
+                    // console.log(trans.transactions[0])
                 }).catch((err)=> {
-                    console.log(err)
+                    console.log("error geting intransfer")
 
                 })
             })   
@@ -93,7 +94,7 @@ const D_Home = ()=>{
                             <View key={index} style={home.hisCard}>
                                 <TouchableOpacity style={home.prodCard} onPress={comingSoon}>
                                     <Image
-                                        source={{uri:"https://thumbs.dreamstime.com/b/bottle-water-12522351.jpg"}} 
+                                        source={{uri:`${value.imageurl}`}} 
                                         style={home.prodPix}
                                     />
                                     <View style={home.prod_view}>
@@ -108,13 +109,13 @@ const D_Home = ()=>{
                                 </TouchableOpacity>
                                 <TouchableOpacity style={{
                                     justifyContent:'center',
-                                    backgroundColor: '#cffce4',
+                                    backgroundColor: '#FFFEFE',
                                     borderTopRightRadius: 50,
                                     borderBottomRightRadius: 50,
                                     width: Dimensions.get('screen').width * 0.15,
                                     alignItems: 'center',
                                     height: 65,
-                                    marginTop:10
+                                    marginTop: 5
                                     }}
                                     onPress={comingSoon}
                                     >

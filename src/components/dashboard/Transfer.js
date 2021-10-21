@@ -24,8 +24,7 @@ const Transfer = ()=>{
                 .then((trans)=>{
                     setdata(trans.transactions)
                 }).catch((err)=> {
-                    console.log(err)
-                    // setdata([])
+                    console.log('error geting outtransfer')
                 })
             })   
         }
@@ -60,7 +59,7 @@ const Transfer = ()=>{
                     />
                     <Text style={transferStyle.upper_card_text}>to other user</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={transferStyle.upper_card} onPress={showme}>
+                <TouchableOpacity style={transferStyle.upper_card} onPress={comingSoon}>
                     <View style={{flexDirection: 'row', alignItems:'center'}}>
                         <MaterialCommunityIcons
                             name='bank-transfer-out'

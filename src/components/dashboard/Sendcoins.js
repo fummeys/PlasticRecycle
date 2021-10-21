@@ -34,17 +34,36 @@ const Sendcoins = () => {
         }).then((res)=> res.json())
         .then((data)=>{
         // console.log(data)
-        // AsyncStorage.setItem('user', JSON.stringify(data.user))
+        if (data.user == "") {
+            Alert.alert(
+                'transfer status', 
+                `${data.transactionstatus}`,
+                [
+                    {
+                        text: 'retry',
+                        style: 'cancel',
+                    },{
+                        text: 'done',
+                        onPress: ()=> naving.navigate('Dashboard')
+                    }
+                ]
+            )            
+        } else {
+            // AsyncStorage.setItem('user', JSON.stringify(data.user))
             Alert.alert(
                 'transfer status', 
                 `you have sent ${amount} to ${data.user.name}`,
                 [
                     {
+                        text: 'retry',
+                        style: 'cancel',
+                    },{
                         text: 'done',
                         onPress: ()=> naving.navigate('Dashboard')
                     }
                 ]
             )
+        }
         }).catch((err)=>{
             Alert.alert(
                 'transfer status', 
@@ -74,7 +93,7 @@ const Sendcoins = () => {
     return (
         <SafeAreaView>
             <View style={ sendcoinStyles.main }>
-                <View style={ sendcoinStyles.backDiv}>
+                {/* <View style={ sendcoinStyles.backDiv}>
                     <TouchableOpacity onPress={gotoDasboard}>
                         <MaterialCommunityIcons 
                             name='keyboard-backspace'
@@ -83,7 +102,7 @@ const Sendcoins = () => {
                         />
                     </TouchableOpacity>
                     <Text>Go back</Text>
-                </View>
+                </View> */}
                 <KeyboardAvoidingView
                     behavior='padding'
                     keyboardVerticalOffset={offset}

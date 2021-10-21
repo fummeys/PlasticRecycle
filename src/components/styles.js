@@ -278,7 +278,7 @@ const home = StyleSheet.create({
     prodCard: {
         margin: 5,
         flexDirection: 'row',
-        backgroundColor: "#cffce4",
+        backgroundColor: "#FFFEFE",
         borderTopLeftRadius: 50,
         borderBottomLeftRadius: 50,
         height: 65,
@@ -406,7 +406,8 @@ const sendcoinStyles = StyleSheet.create({
     transferForm: {
         height: Dimensions.get('screen').height * 0.5,
         width: Dimensions.get('screen').width * 0.9,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        paddingTop: Dimensions.get('screen').height * 0.05,
     },
     formtext:{
         backgroundColor: "#e1eaea",
@@ -420,7 +421,8 @@ const sendcoinStyles = StyleSheet.create({
     },
     BigText: {
         fontSize: 25,
-        fontWeight: '700'
+        fontWeight: '700',
+        paddingBottom: 50
     },
     normalText: {
         fontSize: 20,
@@ -493,4 +495,5 @@ const prevStyles = StyleSheet.create({
 module.exports = {
     welcome, login, signup, dashboard, 
     home, transferStyle, sendcoinStyles, 
-    cameraScreen, prevStyles};
+    cameraScreen, prevStyles
+};
