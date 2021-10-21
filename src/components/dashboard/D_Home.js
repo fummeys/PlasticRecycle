@@ -14,11 +14,9 @@ const D_Home = ()=>{
     const naving = useNavigation()
 
     useEffect(()=>{
-        AsyncStorage.getItem('user')
-        .then((res)=>{
+        AsyncStorage.getItem('user',(err, res)=>{
             let a = JSON.parse(res)
             setuser(a)
-            // console.log('set user')
         })
         if (data.length < 1) {
             AsyncStorage.getItem('token', (err, dat)=>{

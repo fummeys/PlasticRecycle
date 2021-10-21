@@ -48,7 +48,7 @@ const Preview = ({route}) => {
                         },{
                             text: 'Done',
                             style: 'default',
-                            onPress: ()=> Naving.navigate('Dashboard')
+                            onPress: ()=> Naving.navigate('D_Home')
                         }
                     ]
                 )

@@ -44,7 +44,7 @@ const Sendcoins = () => {
                         style: 'cancel',
                     },{
                         text: 'done',
-                        onPress: ()=> naving.navigate('Dashboard')
+                        onPress: ()=> naving.navigate('D_Home')
                     }
                 ]
             )            
@@ -59,7 +59,7 @@ const Sendcoins = () => {
                         style: 'cancel',
                     },{
                         text: 'done',
-                        onPress: ()=> naving.navigate('Dashboard')
+                        onPress: ()=> naving.navigate('D_Home')
                     }
                 ]
             )
@@ -75,7 +75,7 @@ const Sendcoins = () => {
                         style: 'cancel'
                     },{
                         text: 'exit',
-                        onPress: ()=> naving.navigate('Dashboard'),
+                        onPress: ()=> naving.navigate('D_Home'),
                         style: 'default'
                     }
                 ]

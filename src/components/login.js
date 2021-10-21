@@ -73,7 +73,7 @@ const Login = ()=>{
                 AsyncStorage.setItem('password', password)
                 AsyncStorage.setItem('user', JSON.stringify(data.user))
                 AsyncStorage.setItem('token', data.token)
-                naving.navigate('Dashboard')
+                naving.navigate('D_Home')
             } else {
                 Alert.alert('Error', data.message[0])                
             }

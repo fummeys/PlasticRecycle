@@ -492,8 +492,41 @@ const prevStyles = StyleSheet.create({
     }
 })
 
+const settingsStyle = StyleSheet.create({
+    main: {
+        backgroundColor: '#FFFFFF',
+        height: '100%',
+        paddingTop: 10
+    },
+    update:{
+        height: Dimensions.get('screen').height * 0.5,
+        width: Dimensions.get('screen').width * 0.8,
+        justifyContent: 'center',
+        alignSelf:'center',
+    },
+    profileImg:{
+        width: 150,
+        height: 150,
+        alignSelf:'center',
+    },
+    textUPdate: {
+        fontSize: 20,
+        textAlign:'left',
+        fontWeight: '700',
+        paddingLeft: 10
+    },
+    Logout:{
+        width: 48,
+        borderWidth: 1,
+        alignSelf: 'center',
+        alignContent: 'center',
+        borderRadius: 5,
+        backgroundColor: '#ff0000'
+    }
+})
+
 module.exports = {
     welcome, login, signup, dashboard, 
     home, transferStyle, sendcoinStyles, 
-    cameraScreen, prevStyles
+    cameraScreen, prevStyles, settingsStyle
 };
